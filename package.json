@@ -1,0 +1,60 @@
+{
+  "name": "ozmoroz-blog-backstop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sergey Stadnik",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsnd --respawn -r @babel/register src/index.ts",
+    "build": "NODE_ENV=production babel ./src -d ./dist --extensions .ts",
+    "typecheck": "tsc",
+    "start": "node dist/index.js",
+    "lint:base": "eslint --ext .js,.json,.ts",
+    "lint": "yarn lint:base 'src/**'"
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "yarn lint:base --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn typecheck && lint-staged"
+    }
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "@types/backstopjs": "^4.1.1",
+    "@types/node": "^13.9.5",
+    "@typescript-eslint/eslint-plugin": "2",
+    "@typescript-eslint/parser": "^2.25.0",
+    "eslint": "6",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-standard-with-typescript": "^15.0.1",
+    "eslint-plugin-import": "2",
+    "eslint-plugin-node": "11",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "4",
+    "eslint-plugin-standard": "4",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "prettier": "^2.0.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.2",
+    "sitemapper": "^3.0.5"
+  }
+}
