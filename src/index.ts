@@ -10,7 +10,7 @@ type BackstopCommand = 'reference' | 'test' | 'approve'
  */
 async function runBackstop(
   command: 'reference' | 'test' | 'approve',
-  siteUrl: string,
+  siteUrl?: string,
 ): Promise<void> {
   const config = await makeConfig(siteUrl)
   return await backstop(command, { config })
@@ -22,10 +22,9 @@ async function runBackstop(
  */
 const argv = yargs
   .usage('$0 <command> <url>')
-  .demand(2)
   .command('reference <url>', 'make a reference screenshots of the site')
   .command('test <url>', 'test the site against the refenrence screenshots')
-  .command('approve <url>', 'approve the changes in the site')
+  .command('approve', 'approve the changes in the site')
   .help().argv
 
 runBackstop(argv._[0] as BackstopCommand, argv.url as string).catch((err) => {
