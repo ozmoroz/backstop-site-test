@@ -1,31 +1,35 @@
+import { URL } from 'url'
 import { Config, Scenario } from 'backstopjs'
 import { parseSitemap } from './lib/sitemap'
 
-export async function makeConfig(sitemapPath: string): Promise<Config> {
-  const pages = await parseSitemap('https://ozmoroz.com/sitemap.xml')
-  // Generate BackstopJS scenarios for every page in the sitemap
-  const scenarios: Scenario[] = pages.map((pageUrl) => ({
-    label: pageUrl,
-    // cookiePath: 'backstop_data/engine_scripts/cookies.json',
-    url: pageUrl,
-    // referenceUrl: '',
-    // readyEvent: '',
-    // readySelector: '',
-    // delay: 0,
-    // hideSelectors: [],
-    // removeSelectors: [],
-    // hoverSelector: '',
-    // clickSelector: '',
-    // postInteractionWait: 0,
-    // selectors: [],
-    // selectorExpansion: true,
-    // expect: 0,
-    // misMatchThreshold: 0.1,
-    // requireSameDimensions: true,
-  }))
+export async function makeConfig(siteUrl?: string): Promise<Config> {
+  let scenarios: Scenario[] = []
+  if (siteUrl !== undefined) {
+    const pages = await parseSitemap(new URL('sitemap.xml', siteUrl).toString())
+    // Generate BackstopJS scenarios for every page in the sitemap
+    scenarios = pages.map((pageUrl) => ({
+      label: pageUrl,
+      // cookiePath: 'backstop_data/engine_scripts/cookies.json',
+      url: pageUrl,
+      // referenceUrl: '',
+      // readyEvent: '',
+      // readySelector: '',
+      delay: 100,
+      // hideSelectors: [],
+      // removeSelectors: [],
+      // hoverSelector: '',
+      // clickSelector: '',
+      // postInteractionWait: 0,
+      // selectors: [],
+      // selectorExpansion: true,
+      // expect: 0,
+      // misMatchThreshold: 0.1,
+      // requireSameDimensions: true,
+    }))
+  }
 
   const config: Config = {
-    id: 'ozmoroz_com',
+    id: siteUrl !== undefined ? new URL(siteUrl).hostname : '',
     viewports: [
       {
         label: 'small',
