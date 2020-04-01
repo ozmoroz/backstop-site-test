@@ -29,7 +29,7 @@ export async function makeConfig(siteUrl?: string): Promise<Config> {
   }
 
   const config: Config = {
-    id: siteUrl !== undefined ? new URL(siteUrl).hostname : '',
+    id: '',
     viewports: [
       {
         label: 'small',
