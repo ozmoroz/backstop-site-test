@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Sergey Stadnik",
-  "license": "MIT",
+  "license": "BeerWare",
   "scripts": {
     "dev": "tsnd --respawn -r @babel/register src/index.ts",
     "build": "NODE_ENV=production babel ./src -d ./dist --extensions .ts",
