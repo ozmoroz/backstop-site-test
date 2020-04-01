@@ -10,7 +10,10 @@
     "typecheck": "tsc",
     "start": "node dist/index.js",
     "lint:base": "eslint --ext .js,.json,.ts",
-    "lint": "yarn lint:base 'src/**'"
+    "lint": "yarn lint:base 'src/**'",
+    "reference": "yarn start reference",
+    "test": "yarn start test",
+    "approve": "yarn start approve"
   },
   "lint-staged": {
     "src/**/*": [
