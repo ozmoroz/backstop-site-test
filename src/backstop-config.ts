@@ -15,7 +15,7 @@ export async function makeConfig(siteUrl?: string): Promise<Config> {
       // readyEvent: '',
       // readySelector: '',
       delay: 100,
-      // hideSelectors: [],
+      hideSelectors: ['#player'],
       // removeSelectors: [],
       // hoverSelector: '',
       // clickSelector: '',
